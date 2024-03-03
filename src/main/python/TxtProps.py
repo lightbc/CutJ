@@ -40,7 +40,7 @@ def update(cfg, op):
 class TxtProps(object):
     """文本属性配置UI"""
 
-    def __init__(self, op=None):
+    def __init__(self, op=None, parent=None):
         self.op = op
         self.props_cfg = FileUtil.loadPropsCfg()
         addTxtProps(self.props_cfg, op)
@@ -157,7 +157,7 @@ class TxtProps(object):
         self.bold.clicked.connect(lambda: self.setBold())
         self.italic.clicked.connect(lambda: self.setItalic())
         self.underline.clicked.connect(lambda: self.setUnderLine())
-        self.color.clicked.connect(lambda: self.showColorSelector())
+        self.color.clicked.connect(lambda: self.showColorSelector(parent))
 
     def init(self):
         """初始化参数"""
@@ -220,9 +220,9 @@ class TxtProps(object):
         self.props_cfg.underLine = self.is_underline
         self.updateCfg()
 
-    def showColorSelector(self):
+    def showColorSelector(self, parent):
         """显示文本颜色选择器"""
-        dialog = ColorSelector(self.color, self.op)
+        dialog = ColorSelector(self.color, self.op, parent)
         dialog.exec_()
 
     def updateCfg(self):
@@ -233,33 +233,39 @@ class TxtProps(object):
 class ColorSelector(QtWidgets.QDialog):
     """颜色选择器"""
 
-    def __init__(self, colorSelector=None, op=None):
-        super(ColorSelector, self).__init__()
+    def __init__(self, colorSelector=None, op=None, parent=None):
+        super(ColorSelector, self).__init__(parent)
+        # 不显示帮助按钮，对话框置顶显示
+        self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowContextHelpButtonHint)
         self.op = op
         self.props_cfg = FileUtil.loadPropsCfg()
         self.colorSelector = colorSelector
-        self.resize(650, 100)
+        self.setFixedSize(650, 100)
         self.widget = QtWidgets.QWidget(self)
         self.dp = DrawProps.DrawProps()
         self.dp.brush_widget.hide()
         self.dp.widget_2.show()
         self.widget.setLayout(self.dp.verticalLayout)
         self.setWindowTitle("颜色")
-        # 不显示帮助按钮
-        self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowContextHelpButtonHint)
+        self.initColor()
 
         self.dp.ok.clicked.connect(lambda: self.selectColor())
         self.dp.cancel.clicked.connect(lambda: self.close())
 
+    def initColor(self):
+        rgb = self.props_cfg.txtColor.split(",")
+        self.dp.red.setText(rgb[0].strip())
+        self.dp.green.setText(rgb[1].strip())
+        self.dp.blue.setText(rgb[2].strip())
+        self.dp.color.setStyleSheet("*{margin:0 20px;border:none;width:70px;height:25px;background-color:rgb("
+                                    + self.props_cfg.txtColor + ")};")
+
     def selectColor(self):
         """更新添加的最新文本颜色属性"""
-        self.colorSelector.setStyleSheet(
-            "*{margin-right:20px;border:none;width:70px;height:25px;background-color:rgb(" + str(
-                self.dp.selectColor) + ")}")
-        self.props_cfg.txtColor = str(self.dp.selectColor)
-        self.updateCfg()
-        self.close()
-
-    def updateCfg(self):
-        """更新属性配置"""
+        self.props_cfg.txtColor = self.dp.red.text() + "," + self.dp.green.text() + "," + self.dp.blue.text()
+        # 更新颜色选择器的显示颜色
+        self.colorSelector.setStyleSheet("*{margin-right:20px;border:none;width:70px;height:25px;background-color:rgb("
+                                         + self.props_cfg.txtColor + ")};")
+        # 更新属性配置
         update(self.props_cfg, self.op)
+        self.close()

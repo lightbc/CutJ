@@ -129,6 +129,7 @@ class Editor:
 
     def drawRect(self):
         """绘制矩形"""
+        self.pt.createDrawRect()
         draw_props = DrawProps.DrawProps(self.dr)
         self.toggle(draw_props.widget, 1)
         self.pt.setCursor(QtCore.Qt.CrossCursor)
@@ -136,6 +137,7 @@ class Editor:
 
     def drawEllipse(self):
         """绘制椭圆"""
+        self.pt.createDrawEllipse()
         draw_props = DrawProps.DrawProps(self.de)
         self.toggle(draw_props.widget, 2)
         self.pt.setCursor(QtCore.Qt.CrossCursor)
@@ -143,6 +145,7 @@ class Editor:
 
     def drawArrow(self):
         """绘制箭头"""
+        self.pt.createDrawArrow()
         draw_props = DrawProps.DrawProps(self.da)
         self.toggle(draw_props.color_widget, 3)
         self.pt.setCursor(QtCore.Qt.CrossCursor)
@@ -150,6 +153,7 @@ class Editor:
 
     def addMosaic(self):
         """绘制遮罩"""
+        self.pt.createDrawMosaic()
         draw_props = DrawProps.DrawProps(self.dm)
         self.toggle(draw_props.brush_widget, 4)
         self.pt.setCursor(QtCore.Qt.ArrowCursor)
@@ -157,7 +161,8 @@ class Editor:
 
     def addTxt(self):
         """添加文本"""
-        txt_props = TxtProps.TxtProps(self.at)
+        self.pt.createAddTxt()
+        txt_props = TxtProps.TxtProps(self.at, self.pt)
         self.toggle(txt_props.widget, 5)
         self.pt.setCursor(QtCore.Qt.IBeamCursor)
         self.setMask(self.at)
@@ -168,6 +173,7 @@ class Editor:
             self.widget.setCursor(QtCore.Qt.ArrowCursor)
             o.resize(self.parentRect[2], self.parentRect[3])
             o.move(self.parentRect[0], self.parentRect[1])
+            o.show()
             # 使当前操作的组件在最上层显示
             o.raise_()
 

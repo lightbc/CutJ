@@ -2,13 +2,14 @@ import os
 import Editor
 from PIL import ImageGrab
 from PyQt5.QtCore import Qt, QPoint
-from PyQt5.QtWidgets import QWidget, QLabel
+from PyQt5.QtWidgets import QWidget, QLabel, QMainWindow
 from PyQt5.QtGui import QPainter, QPen, QBrush, QColor, QPolygon
 from util import WindowUtil, AppUtil, DrawUtil, TxtUtil, CommonUtil
 
 
 class CustomLabel(QLabel):
     """自定义截图组件"""
+
     def __init__(self, parent=None):
         super().__init__(parent)
         # 属性配置UI对象
@@ -350,15 +351,18 @@ class CustomLabel(QLabel):
                 self.repaint()
 
 
-class Window(QWidget):
+class Window(QMainWindow):
     """截屏主界面窗体"""
+
     def __init__(self):
         super().__init__()
         self.setWindowTitle(AppUtil.app_name)
         WindowUtil.setIcon(self, AppUtil.app_icon)
         # 设置截屏界面全屏且不显示窗体边框
         self.setMinimumSize(WindowUtil.screen_width(), WindowUtil.screen_height())
-        self.setWindowFlags(Qt.FramelessWindowHint)
+        # 窗体去除边框、标题栏、工具栏等，以及窗体始终置顶
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
+        # 窗体透明
         self.setAttribute(Qt.WA_TranslucentBackground)
 
         self.is_ctrl = False
@@ -366,18 +370,46 @@ class Window(QWidget):
         self.cutRect.setMinimumSize(WindowUtil.screen_width(), WindowUtil.screen_height())
         self.cutRect.setStyleSheet("background-color:rgba(0, 0, 0, .01);")
 
-        edt = Editor.Editor(self)
-        drawRect = DrawUtil.DrawRect(parent=self)
-        drawEllipse = DrawUtil.DrawEllipse(parent=self)
-        drawArrow = DrawUtil.DrawArrow(parent=self)
-        drawMosaic = DrawUtil.DrawMosaic(parent=self)
-        addTxt = TxtUtil.TextArea(parent=self)
-        edt.dr = drawRect
-        edt.de = drawEllipse
-        edt.da = drawArrow
-        edt.dm = drawMosaic
-        edt.at = addTxt
-        self.cutRect.edt = edt
+        self.edt = Editor.Editor(self)
+        self.drawRect = None
+        self.drawEllipse = None
+        self.drawArrow = None
+        self.drawMosaic = None
+        self.addTxt = None
+        self.create()
+        self.cutRect.edt = self.edt
+
+    def create(self):
+        self.createDrawRect()
+        self.createDrawEllipse()
+        self.createDrawArrow()
+        self.createDrawMosaic()
+        self.createAddTxt()
+
+    def createDrawRect(self):
+        """创建绘制矩形图层"""
+        self.drawRect = DrawUtil.DrawRect(parent=self)
+        self.edt.dr = self.drawRect
+
+    def createDrawEllipse(self):
+        """创建绘制椭圆图层"""
+        self.drawEllipse = DrawUtil.DrawEllipse(parent=self)
+        self.edt.de = self.drawEllipse
+
+    def createDrawArrow(self):
+        """创建绘制箭头图层"""
+        self.drawArrow = DrawUtil.DrawArrow(parent=self)
+        self.edt.da = self.drawArrow
+
+    def createDrawMosaic(self):
+        """创建绘制遮罩图层"""
+        self.drawMosaic = DrawUtil.DrawMosaic(parent=self)
+        self.edt.dm = self.drawMosaic
+
+    def createAddTxt(self):
+        """ 创建添加文本图层"""
+        self.addTxt = TxtUtil.TextArea(parent=self)
+        self.edt.at = self.addTxt
 
     def keyPressEvent(self, event):
         # 键盘CTRL键按下
@@ -390,10 +422,15 @@ class Window(QWidget):
         if event.key() == Qt.Key_Escape:
             self.close()
 
+        if event.key() == Qt.Key_Shift:
+            self.drawEllipse.is_press_shift = True
+
     def keyReleaseEvent(self, event):
         # 键盘CTRL键释放
         if event.key() == Qt.Key_Control:
             self.is_ctrl = False
+        if event.key() == Qt.Key_Shift:
+            self.drawEllipse.is_press_shift = False
 
     def doCut(self):
         if self.cutRect.rect:

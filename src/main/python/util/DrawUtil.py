@@ -43,6 +43,7 @@ class DrawRect(QtWidgets.QLabel):
 
     def __init__(self, brushSize=5, brushColor="255, 0, 0", parent=None):
         super().__init__(parent)
+        self.hide()
         # 避免需要点击组件后，才能监听鼠标移动
         self.setMouseTracking(True)
         # 绘制截图区域后，截图区域中的标记矩形
@@ -137,6 +138,7 @@ class DrawEllipse(QtWidgets.QLabel):
 
     def __init__(self, brushSize=5, brushColor="255, 0, 0", parent=None):
         super().__init__(parent)
+        self.hide()
         # 避免需要点击组件后，才能监听鼠标移动
         self.setMouseTracking(True)
         # 椭圆中心点横坐标
@@ -211,16 +213,6 @@ class DrawEllipse(QtWidgets.QLabel):
             self.range(pos)
             self.repaint()
 
-    def keyPressEvent(self, event):
-        """绘制椭圆时shift键按下"""
-        if event.key() == QtCore.Qt.Key_Shift:
-            self.is_press_shift = True
-
-    def keyReleaseEvent(self, event):
-        """绘制椭圆时shift键释放"""
-        if event.key() == QtCore.Qt.Key_Shift:
-            self.is_press_shift = False
-
     def range(self, pos):
         """
         椭圆绘制限制区域
@@ -267,16 +259,18 @@ def getArrow(x1, y1, x2, y2, arrowSize=5):
     # 箭头长度
     line.setLine(x1, y1, x2, y2)
     # 箭头角度
-    angle = math.acos(line.dx() / line.length())
-    distanceFromEnd = 5
-    arrowStart = line.pointAt(1 - distanceFromEnd / line.length())
-    if line.dy() >= 0:
-        angle = 2 * math.pi - angle
-    arrow1 = arrowStart + QtCore.QPointF(math.sin(angle - math.pi / 3) * arrowSize,
-                                         math.cos(angle - math.pi / 3) * arrowSize)
-    arrow2 = arrowStart + QtCore.QPointF(math.sin(angle - math.pi + math.pi / 3) * arrowSize,
-                                         math.cos(angle - math.pi + math.pi / 3) * arrowSize)
-    return arrow1, arrow2
+    if line.length() > 0:
+        angle = math.acos(line.dx() / line.length())
+        distanceFromEnd = 5
+        arrowStart = line.pointAt(1 - distanceFromEnd / line.length())
+        if line.dy() >= 0:
+            angle = 2 * math.pi - angle
+        arrow1 = arrowStart + QtCore.QPointF(math.sin(angle - math.pi / 3) * arrowSize,
+                                             math.cos(angle - math.pi / 3) * arrowSize)
+        arrow2 = arrowStart + QtCore.QPointF(math.sin(angle - math.pi + math.pi / 3) * arrowSize,
+                                             math.cos(angle - math.pi + math.pi / 3) * arrowSize)
+        return arrow1, arrow2
+    return None
 
 
 class DrawArrow(QtWidgets.QLabel):
@@ -284,6 +278,7 @@ class DrawArrow(QtWidgets.QLabel):
 
     def __init__(self, brushColor="255, 0, 0", parent=None):
         super().__init__(parent)
+        self.hide()
         # 避免需要点击组件后，才能监听鼠标移动
         self.setMouseTracking(True)
         # 直线起点横坐标
@@ -317,16 +312,18 @@ class DrawArrow(QtWidgets.QLabel):
                 qp.setPen(getPen(arrow["color"], 5))
                 a = arrow["arrow"]
                 arrow = getArrow(a[0], a[1], a[2], a[3])
-                qp.drawLine(a[0], a[1], a[2], a[3])
-                qp.drawLine(a[2], a[3], arrow[0].x(), arrow[0].y())
-                qp.drawLine(a[2], a[3], arrow[1].x(), arrow[1].y())
+                if arrow:
+                    qp.drawLine(a[0], a[1], a[2], a[3])
+                    qp.drawLine(a[2], a[3], arrow[0].x(), arrow[0].y())
+                    qp.drawLine(a[2], a[3], arrow[1].x(), arrow[1].y())
 
         if self.start_x and self.start_y:
             qp.setPen(getPen(self.brushColor, 5))
             arrow = getArrow(self.start_x, self.start_y, self.end_x, self.end_y)
-            qp.drawLine(self.start_x, self.start_y, self.end_x, self.end_y)
-            qp.drawLine(self.end_x, self.end_y, arrow[0].x(), arrow[0].y())
-            qp.drawLine(self.end_x, self.end_y, arrow[1].x(), arrow[1].y())
+            if arrow:
+                qp.drawLine(self.start_x, self.start_y, self.end_x, self.end_y)
+                qp.drawLine(self.end_x, self.end_y, arrow[0].x(), arrow[0].y())
+                qp.drawLine(self.end_x, self.end_y, arrow[1].x(), arrow[1].y())
 
     def mousePressEvent(self, event):
         self.isLeftPress = True
@@ -371,6 +368,7 @@ class DrawMosaic(QtWidgets.QLabel):
 
     def __init__(self, brushSize=5, parent=None):
         super().__init__(parent)
+        self.hide()
         # 避免需要点击组件后，才能监听鼠标移动
         self.setMouseTracking(True)
         # 笔刷大小

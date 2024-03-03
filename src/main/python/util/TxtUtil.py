@@ -8,6 +8,7 @@ class TextArea(QtWidgets.QLabel):
     def __init__(self, fontFamily="黑体", fontSize=12, bold=False, italic=False, underline=False, fontColor="255, 0, 0",
                  parent=None):
         super().__init__(parent)
+        self.hide()
         # 文本域
         self.textEdit = None
         # 鼠标点击坐标
@@ -29,8 +30,9 @@ class TextArea(QtWidgets.QLabel):
         """在鼠标点击位置创建文本域"""
         pos = event.pos()
         self.startPoint = pos
-        # 移除历史文本域的边框及背景色
+        # 移除历史文本域的边框及背景色，以及设置不可再次编辑
         if self.textEdit:
+            self.textEdit.setEnabled(False)
             self.textEdit.setStyleSheet("*{border:none;background-color:rgba(255, 255, 255, 0);}")
         self.textEdit = TextEdit(self)
         # 获取文本域最大尺寸
@@ -104,7 +106,9 @@ class TextEdit(QtWidgets.QTextEdit):
             self.setFontFamily(self.pt.fontFamily)
             self.setFontPointSize(self.pt.fontSize)
             if self.pt.bold:
-                self.setFontWeight(800)
+                self.setFontWeight(QtGui.QFont.Bold)
+            else:
+                self.setFontWeight(QtGui.QFont.Normal)
             self.setFontItalic(self.pt.italic)
             self.setFontUnderline(self.pt.underline)
             rgb = self.pt.fontColor.split(",")
