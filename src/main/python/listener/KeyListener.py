@@ -28,6 +28,10 @@ class CutKeyListener:
             showCutWin()
             self.is_alt = False
 
+    def on_release(self, key):
+        if key == keyboard.Key.alt_l:
+            self.is_alt = False
+
     def listener(self):
-        with keyboard.Listener(on_press=self.on_press) as listener:
+        with keyboard.Listener(on_press=self.on_press, on_release=self.on_release) as listener:
             listener.join()

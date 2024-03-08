@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>752</width>
-    <height>50</height>
+    <height>60</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -98,8 +98,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>../resources/images/rect.png</normaloff>../resources/images/rect.png</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/images/resources/images/rect.png</normaloff>:/images/resources/images/rect.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -124,8 +124,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>../resources/images/ellipse.png</normaloff>../resources/images/ellipse.png</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/images/resources/images/ellipse.png</normaloff>:/images/resources/images/ellipse.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -156,8 +156,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>../resources/images/arrow.png</normaloff>../resources/images/arrow.png</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/images/resources/images/arrow.png</normaloff>:/images/resources/images/arrow.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -182,8 +182,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>../resources/images/mosaic.png</normaloff>../resources/images/mosaic.png</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/images/resources/images/mosaic.png</normaloff>:/images/resources/images/mosaic.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -208,8 +208,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>../resources/images/txt.png</normaloff>../resources/images/txt.png</iconset>
+            <iconset resource="images.qrc">
+             <normaloff>:/images/resources/images/txt.png</normaloff>:/images/resources/images/txt.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -230,6 +230,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>

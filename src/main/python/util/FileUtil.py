@@ -53,27 +53,6 @@ def choose_save_dir(parent=None, dir_path=AppUtil.getTempDir()):
     return QFileDialog.getExistingDirectory(parent, "保存位置", dir_path)
 
 
-def loadFontsDict():
-    """
-    加载字体列表项
-    :return: 字体字典
-    """
-    res = {}
-    # 加载字体文件路径
-    fonts_path = os.path.abspath("../resources/fonts.txt")
-    content = read(fonts_path)
-    # 处理加载的字体文件内容，将内容转换为字典类型
-    if content and content.strip():
-        content = content.strip()
-        contents = content.split("\n")
-        for c in contents:
-            if c and c.strip():
-                c = c.strip()
-                kv = c.split("=")
-                res[kv[0]] = kv[1]
-    return res
-
-
 def loadPropsCfg():
     """
     加载再编辑属性配置文件

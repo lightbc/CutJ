@@ -1,3 +1,5 @@
+import images
+import Fonts
 import DrawProps
 from PyQt5 import QtCore, QtGui, QtWidgets
 from util import AppUtil, FileUtil, WindowUtil
@@ -68,7 +70,7 @@ class TxtProps(object):
                                 ":hover{background-color:rgba(0,0,0,.1);}")
         self.bold.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../resources/images/bold.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/images/resources/images/bold.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.bold.setIcon(icon)
         self.bold.setIconSize(QtCore.QSize(25, 25))
         self.bold.setObjectName("bold")
@@ -83,7 +85,7 @@ class TxtProps(object):
                                      ":hover{background-color:rgba(0,0,0,.1);}")
         self.underline.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../resources/images/underline.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(":/images/resources/images/underline.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.underline.setIcon(icon1)
         self.underline.setIconSize(QtCore.QSize(25, 25))
         self.underline.setObjectName("underline")
@@ -94,7 +96,7 @@ class TxtProps(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.fontSize.sizePolicy().hasHeightForWidth())
         self.fontSize.setSizePolicy(sizePolicy)
-        self.fontSize.setStyleSheet("*{width:20px;height:25px;}")
+        self.fontSize.setStyleSheet("*{width:30px;height:25px;}")
         self.fontSize.setObjectName("fontSize")
         self.gridLayout_2.addWidget(self.fontSize, 1, 1, 1, 1)
         self.italic = QtWidgets.QPushButton(self.widget)
@@ -107,14 +109,13 @@ class TxtProps(object):
                                   ":hover{background-color:rgba(0,0,0,.1);}")
         self.italic.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("../resources/images/italic.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap(":/images/resources/images/italic.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.italic.setIcon(icon2)
         self.italic.setIconSize(QtCore.QSize(25, 25))
         self.italic.setObjectName("italic")
         self.gridLayout_2.addWidget(self.italic, 1, 3, 1, 1)
         self.color = QtWidgets.QPushButton(self.widget)
-        self.color.setStyleSheet(
-            "*{margin-right:20px;border:none;width:70px;height:25px;background-color:rgb(255, 0, 0)};")
+        self.color.setStyleSheet("*{margin:0 20px;border:none;width:70px;height:25px;background-color:red;}")
         self.color.setText("")
         self.color.setIconSize(QtCore.QSize(25, 25))
         self.color.setObjectName("color")
@@ -171,10 +172,8 @@ class TxtProps(object):
     def initFontFamily(self):
         """初始化字体类型选择列表项"""
         if len(font_names) == 0:
-            fonts = FileUtil.loadFontsDict()
-            if fonts and len(fonts) > 0:
-                for key in fonts:
-                    font_names.append(fonts[key])
+            for font in Fonts.Fonts:
+                font_names.append(font.value)
         self.font.addItems(font_names)
 
     def getFontFamily(self):

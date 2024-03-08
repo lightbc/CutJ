@@ -1,3 +1,4 @@
+import images
 import DrawProps
 import TxtProps
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -50,7 +51,7 @@ class Editor:
         self.rect.setStyleSheet("*{border:none;width:40px;height:50px;}:hover{background-color:rgba(0, 0, 0, .1);}")
         self.rect.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../resources/images/rect.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/images/resources/images/rect.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.rect.setIcon(icon)
         self.rect.setIconSize(QtCore.QSize(25, 25))
         self.rect.setObjectName("rect")
@@ -60,7 +61,7 @@ class Editor:
         self.ellipse.setStyleSheet("*{border:none;width:40px;height:50px;}:hover{background-color:rgba(0, 0, 0, .1);}")
         self.ellipse.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../resources/images/ellipse.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(":/images/resources/images/ellipse.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.ellipse.setIcon(icon1)
         self.ellipse.setIconSize(QtCore.QSize(25, 25))
         self.ellipse.setObjectName("ellipse")
@@ -75,7 +76,7 @@ class Editor:
         self.arrow.setStyleSheet("*{border:none;width:40px;height:50px;}:hover{background-color:rgba(0, 0, 0, .1);}")
         self.arrow.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("../resources/images/arrow.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap(":/images/resources/images/arrow.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.arrow.setIcon(icon2)
         self.arrow.setIconSize(QtCore.QSize(25, 25))
         self.arrow.setObjectName("arrow")
@@ -85,7 +86,7 @@ class Editor:
         self.mosaic.setStyleSheet("*{border:none;width:40px;height:50px;}:hover{background-color:rgba(0, 0, 0, .1);}")
         self.mosaic.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("../resources/images/mosaic.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap(":/images/resources/images/mosaic.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.mosaic.setIcon(icon3)
         self.mosaic.setIconSize(QtCore.QSize(25, 25))
         self.mosaic.setObjectName("mosaic")
@@ -95,7 +96,7 @@ class Editor:
         self.txt.setStyleSheet("*{border:none;width:40px;height:50px;}:hover{background-color:rgba(0, 0, 0, .1);}")
         self.txt.setText("")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("../resources/images/txt.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon4.addPixmap(QtGui.QPixmap(":/images/resources/images/txt.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.txt.setIcon(icon4)
         self.txt.setIconSize(QtCore.QSize(25, 25))
         self.txt.setObjectName("txt")

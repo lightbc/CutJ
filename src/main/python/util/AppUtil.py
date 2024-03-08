@@ -7,9 +7,9 @@ app_dir = "CutJ"
 # 截屏操作属性配置文件默认名称
 props_cfg_name = app_name + "_Props.cfg"
 # 图标存放目录
-icon_dir = "../resources/images/"
+icon_dir = ":/images/resources/images/"
 # 程序logo
-app_icon = icon_dir + "cut_logo.png"
+app_icon = icon_dir + "cut_logo.ico"
 # 设置图标
 settings_icon = icon_dir + "settings.png"
 

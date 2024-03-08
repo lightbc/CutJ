@@ -1,3 +1,4 @@
+import images
 from PyQt5 import QtCore, QtGui, QtWidgets
 from util import AppUtil, WindowUtil, FileUtil
 
@@ -49,7 +50,7 @@ class DrawProps(object):
         self.small.setStyleSheet("*{border:none;margin:10px;}")
         self.small.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../resources/images/small_normal.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/images/resources/images/small_normal.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.small.setIcon(icon)
         self.small.setIconSize(QtCore.QSize(25, 25))
         self.small.setObjectName("small")
@@ -58,7 +59,8 @@ class DrawProps(object):
         self.middle.setStyleSheet("*{border:none;margin:10px;}")
         self.middle.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../resources/images/middle_normal.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(":/images/resources/images/middle_normal.png"), QtGui.QIcon.Normal,
+                        QtGui.QIcon.Off)
         self.middle.setIcon(icon1)
         self.middle.setIconSize(QtCore.QSize(25, 25))
         self.middle.setObjectName("middle")
@@ -67,7 +69,7 @@ class DrawProps(object):
         self.big.setStyleSheet("*{border:none;margin:10px;}")
         self.big.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("../resources/images/big_normal.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap(":/images/resources/images/big_normal.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.big.setIcon(icon2)
         self.big.setIconSize(QtCore.QSize(25, 25))
         self.big.setObjectName("big")

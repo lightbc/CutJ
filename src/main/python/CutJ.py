@@ -1,9 +1,8 @@
 import pystray
+import Logo
 import threading
-from PIL import Image
 from actions import AboutAction, SettingsAction
 from listener import KeyListener
-from util import AppUtil
 
 
 def settings():
@@ -28,14 +27,12 @@ class CutJ:
 
     def tray_menu(self):
         """托盘菜单"""
-        im = Image.open(AppUtil.app_icon)
         tray_menu = (
             pystray.MenuItem("设置", settings),
             pystray.MenuItem("关于", about),
-            pystray.MenuItem("退出", lambda: self.exit_sys()),
-            # pystray.MenuItem("打开截图", action=KeyListener.showCutWin, default=True, visible=False)
+            pystray.MenuItem("退出", lambda: self.exit_sys())
         )
-        self.app = pystray.Icon("CutJ", im, "CutJ", tray_menu)
+        self.app = pystray.Icon("CutJ", Logo.im, "CutJ", tray_menu)
         self.app.run()
 
     def exit_sys(self):

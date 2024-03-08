@@ -7,15 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>590</width>
-    <height>418</height>
+    <height>209</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>设置</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../resources/images/settings.png</normaloff>../resources/images/settings.png</iconset>
+   <iconset resource="images.qrc">
+    <normaloff>:/images/resources/images/settings.png</normaloff>:/images/resources/images/settings.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="1" column="0">
@@ -54,6 +54,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>

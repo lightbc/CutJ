@@ -99,6 +99,7 @@ class TextEdit(QtWidgets.QTextEdit):
         self.pre_words = None
         # 文本域本次行数变化前一次记录
         self.pre_lines = None
+        self.setTxtStyle()
 
     def setTxtStyle(self):
         """设置文本显示样式"""

@@ -80,8 +80,8 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>../resources/images/bold.png</normaloff>../resources/images/bold.png</iconset>
+           <iconset resource="images.qrc">
+            <normaloff>:/images/resources/images/bold.png</normaloff>:/images/resources/images/bold.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -107,8 +107,8 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>../resources/images/underline.png</normaloff>../resources/images/underline.png</iconset>
+           <iconset resource="images.qrc">
+            <normaloff>:/images/resources/images/underline.png</normaloff>:/images/resources/images/underline.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -202,8 +202,8 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>../resources/images/italic.png</normaloff>../resources/images/italic.png</iconset>
+           <iconset resource="images.qrc">
+            <normaloff>:/images/resources/images/italic.png</normaloff>:/images/resources/images/italic.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -249,6 +249,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>
