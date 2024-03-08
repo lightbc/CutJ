@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QDialog, QApplication
 from util import AppUtil, WindowUtil
 
 # 版本信息
-version = "v1.0.0"
+version = "v1.0.1"
 
 
 class AboutAction(QDialog, About.Ui_Dialog):
