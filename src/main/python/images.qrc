@@ -1,0 +1,26 @@
+<RCC>
+  <qresource prefix="images">
+    <file>resources/images/arrow.png</file>
+    <file>resources/images/big_normal.png</file>
+    <file>resources/images/big_select.png</file>
+    <file>resources/images/bold.png</file>
+    <file>resources/images/bold_select.png</file>
+    <file>resources/images/cut_logo.ico</file>
+    <file>resources/images/cut_logo.png</file>
+    <file>resources/images/ellipse.png</file>
+    <file>resources/images/esc.png</file>
+    <file>resources/images/italic.png</file>
+    <file>resources/images/italic_select.png</file>
+    <file>resources/images/middle_normal.png</file>
+    <file>resources/images/middle_select.png</file>
+    <file>resources/images/mosaic.png</file>
+    <file>resources/images/rect.png</file>
+    <file>resources/images/save.png</file>
+    <file>resources/images/settings.png</file>
+    <file>resources/images/small_normal.png</file>
+    <file>resources/images/small_select.png</file>
+    <file>resources/images/txt.png</file>
+    <file>resources/images/underline.png</file>
+    <file>resources/images/underline_select.png</file>
+  </qresource>
+</RCC>
