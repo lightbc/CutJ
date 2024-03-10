@@ -385,15 +385,17 @@ class DrawMosaic(QtWidgets.QLabel):
         pp = QPainter(self.pix)
         # 开启反走样效果
         pp.setRenderHint(pp.Antialiasing)
-        pp.setPen(getPen("255, 0, 0", self.brushSize))
-        # 根据鼠标指针前后两个位置绘制直线
-        pp.drawLine(self.lastPoint, self.endPoint)
+        # 避免初始时的默认画笔显示问题
+        if self.lastPoint:
+            pp.setPen(getPen("255, 0, 0", self.brushSize))
+            # 根据鼠标指针前后两个位置绘制直线
+            pp.drawLine(self.lastPoint, self.endPoint)
 
-        # 让前一个坐标等于后一个坐标值
-        # 这样就能实现出连续的线
-        self.lastPoint = self.endPoint
-        painter = QPainter(self)
-        painter.drawPixmap(0, 0, self.pix)
+            # 让前一个坐标等于后一个坐标值
+            # 这样就能实现出连续的线
+            self.lastPoint = self.endPoint
+            painter = QPainter(self)
+            painter.drawPixmap(0, 0, self.pix)
 
     def mousePressEvent(self, event):
         if event.button() == QtCore.Qt.LeftButton:
