@@ -2,6 +2,7 @@ import os
 from PyQt5.QtWidgets import QFileDialog
 from entity import DrawProps
 from util import AppUtil
+from actions import SettingsAction
 
 
 def read(path):
@@ -41,6 +42,11 @@ def write(path, content):
         raise e
     finally:
         return b
+
+
+def get_save_path():
+    """获取截图保存路径"""
+    return SettingsAction.load_settings().save_path
 
 
 def choose_save_dir(parent=None, dir_path=AppUtil.getTempDir()):

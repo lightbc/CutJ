@@ -4,7 +4,7 @@ from PIL import ImageGrab
 from PyQt5.QtCore import Qt, QPoint
 from PyQt5.QtWidgets import QWidget, QLabel, QMainWindow
 from PyQt5.QtGui import QPainter, QPen, QBrush, QColor, QPolygon
-from util import WindowUtil, AppUtil, DrawUtil, TxtUtil, CommonUtil
+from util import WindowUtil, AppUtil, DrawUtil, TxtUtil, CommonUtil, FileUtil
 
 
 class CustomLabel(QLabel):
@@ -440,6 +440,6 @@ class Window(QMainWindow):
             bbox = (rect[0] + cut_side, rect[1] + cut_side, rect[0] + rect[2] - cut_side,
                     rect[1] + rect[3] - cut_side)
             im = ImageGrab.grab(bbox)
-            save_path = AppUtil.getTempDir() + os.sep + CommonUtil.getTempImageFileName()
+            save_path = FileUtil.get_save_path() + os.sep + CommonUtil.getTempImageFileName()
             im.save(save_path)
             self.close()
