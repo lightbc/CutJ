@@ -65,7 +65,7 @@ def loadPropsCfg():
     :return: 配置内容
     """
     dp = DrawProps.DrawProps()
-    cfg_path = AppUtil.getPropsCfgPath()
+    cfg_path = is_valid_path(get_save_path()) if get_save_path() else AppUtil.getPropsCfgPath()
     rs = read(cfg_path)
     if rs and len(rs) > 0:
         try:
@@ -84,6 +84,11 @@ def updatePropsCfg(o: DrawProps.DrawProps):
     :param o: 配置信息
     :return: true-更新成功，false-更新失败
     """
-    cfg_path = AppUtil.getPropsCfgPath()
+    cfg_path = is_valid_path(get_save_path()) if get_save_path() else AppUtil.getPropsCfgPath()
     data = o.toJsonStr()
     return write(cfg_path, data)
+
+
+def is_valid_path(path):
+    """判断路径是否存在"""
+    return os.path.exists(path)

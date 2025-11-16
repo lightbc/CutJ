@@ -1,5 +1,5 @@
 import sys
-import ScreenShot
+from util import ScreenShot
 from PyQt5.QtWidgets import QApplication
 from pynput import keyboard
 

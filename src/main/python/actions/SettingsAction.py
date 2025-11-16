@@ -1,6 +1,6 @@
 import sys
 import json
-import Settings
+from ui import Settings
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QApplication
 from util import FileUtil, AppUtil

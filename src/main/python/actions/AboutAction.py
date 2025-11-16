@@ -1,5 +1,5 @@
 import sys
-import About
+from ui import About
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QApplication
 from util import AppUtil, WindowUtil

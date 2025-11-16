@@ -1,5 +1,5 @@
 import pystray
-import Logo
+from util import Logo
 import threading
 from actions import AboutAction, SettingsAction
 from listener import KeyListener
